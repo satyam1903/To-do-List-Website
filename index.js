@@ -161,7 +161,7 @@ app.get("/:customList",function(req,res){
 });
 
 
-app.listen(3000 || process.env.PORT,function(req,res){
+app.listen( process.env.PORT || 3000,function(req,res){
     // console.log(din);
     console.log("hello");
 })
