@@ -16,13 +16,16 @@
         <label class="head" >To Do</label>
         <ul>
          <%   for(var i=0;i<Listitem.length;i++){ %>
+             <form action="/delete" method="post">
              <div class="item">
-                <input type="checkbox">
-                <p ><%=Listitem[i]%></p>
+                <input type="checkbox" name="checkbox" value="<%=Listitem[i]._id%>" onChange="this.form.submit()">
+                <p ><%=Listitem[i].item%></p>
             </div>
+            <input type="hidden" name="Listname" value="<%=Lists%>">
+        </form>
           <%}%>
         </ul>
-        <form action="/" method="post">
+        <form action="/" method="post" class="form">
         <input type="text" name="Listitem" placeholder="New Item">
         <button type="submit" name="button" value="<%=Lists%>">+</button>
     </form>
