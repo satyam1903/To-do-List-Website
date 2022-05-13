@@ -14,5 +14,8 @@
   },
   "author": "sam",
   "license": "ISC",
+  "engines": {
+    "node": "17.1.0"
+  },
   "description": ""
 }

@@ -9,13 +9,14 @@ const date = require("./date");
 const mongoose=require("mongoose");
 const app=express();
 const _=require("lodash");
+let din=Today.getDate();
 
 
-
-mongoose.connect('mongodb://127.0.0.1:27017/todoList',{useUnifiedTopology: true,useNewUrlParser: true},
+mongoose.connect('mongodb+srv://sam123:Sam1234@todoapp.7ffi9.mongodb.net/todoList',{useUnifiedTopology: true,useNewUrlParser: true},
 () =>console.log("connnected")
 
 );
+
 const toDoSchema=new mongoose.Schema({
     item:String
 });
@@ -48,7 +49,7 @@ work.find({name:'study'},function(err,items){
  
 });
 app.get("/",function(req,res){
-    let din=Today.getDate();
+    
      console.log(din);
      work.find({},function(err,items){
         if(items.length===0){
@@ -60,6 +61,7 @@ app.get("/",function(req,res){
                     console.log("inserted Successfully");
                 }
 });
+
 res.redirect("/");
         }
 
@@ -79,10 +81,13 @@ app.post("/",function(request,response){
     const itemName=new work({
         item:i
     });
-    if(Listname==="May 10, 2022"){
+    if(Listname===din){
         console.log("1");
-    itemName.save();
-    response.redirect("/");
+    itemName.save(function(err){ 
+       
+        response.redirect("/");});
+    
+   
     }
     else{
         console.log(Listname);
@@ -102,7 +107,7 @@ app.get("/work",function(req,res){
 app.post("/delete",function(req,res){
     const id=req.body.checkbox;
     const checkListname=req.body.Listname;
-    if(checkListname==="May 10, 2022"){
+    if(checkListname===din){
     work.findByIdAndRemove(id,function(err){
         if(err){
             console.log("not successfull");
